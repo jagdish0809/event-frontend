@@ -40,10 +40,12 @@ const Homepage = (props) => {
   return (
     <div className="homepage">
       <img src={logo} alt="logo" className="logo" />
-      <h1 className="h-text"> Hello Jagdish</h1>
+      <h1 className="h-text"> Hello {props.sendData.name}</h1>
       <img src={imgUrl} alt="QR" className="app__homepage-qr" />
       <h2 className="">Registered Successfully</h2>
-      <div className="button">Download QR</div>
+      <a href={imgUrl} download className="button">
+        <div>Download QR</div>
+      </a>
     </div>
   );
 };
