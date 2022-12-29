@@ -3,7 +3,7 @@ import "./Register.css";
 import axios from "axios";
 import logo from "../../assests/360-logo.png";
 import { useNavigate } from "react-router-dom";
-import QRCode from "qrcode";
+// import QRCode from "qrcode";
 
 const Register = (props) => {
   const navigate = useNavigate();
@@ -28,12 +28,12 @@ const Register = (props) => {
   const register = () => {
     const { name, email, company, city } = user;
     if (name && email && company && city) {
-      axios.post("http://localhost:9002/register", user).then((res) => {
+      axios.post("https://event-backend.cyclic.app/register", user).then((res) => {
         if (res.data.message === "User already registered") {
           alert(res.data.message);
           navigate("/login");
         } else {
-          props.getData(user.email)
+          props.getData(user)
           navigate("/homepage");
         }
       });
@@ -52,7 +52,6 @@ const Register = (props) => {
 
   return (
     <div className="register">
-      {console.log(imgUrl)}
       <img src={logo} alt="logo" className="logo" />
       <h2>Registeration</h2>
       <input

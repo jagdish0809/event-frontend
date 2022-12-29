@@ -49,8 +49,52 @@
 // };
 
 // export default Admin
+// import React, { Component } from "react";
+// import QrReader from "react-qr-scanner";
+
+// class Admin extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       delay: 500,
+//       result: "No result",
+//     };
+
+//     this.handleScan = this.handleScan.bind(this);
+//   }
+//   handleScan(data) {
+//     this.setState({
+//       result: data,
+//     });
+//   }
+//   handleError(err) {
+//     console.error(err);
+//   }
+//   render() {
+//     const previewStyle = {
+//       height: 240,
+//       width: 320,
+//     };
+
+//     return (
+//       <div>
+//         <QrReader
+//           delay={this.state.delay}
+//           style={previewStyle}
+//           onError={this.handleError}
+//           onScan={this.handleScan}
+//         />
+//         <p>code: {this.state.result}</p>
+//         {/* {console.log(this.state.result)} */}
+//       </div>
+//     );
+//   }
+// }
+
+// export default Admin;
+
 import React, { Component } from "react";
-import QrReader from "react-qr-scanner";
+import QrReader from "react-weblineindia-qrcode-scanner";
 
 class Admin extends Component {
   constructor(props) {
@@ -84,12 +128,12 @@ class Admin extends Component {
           onError={this.handleError}
           onScan={this.handleScan}
         />
-        <p>code: {this.state.result}</p>
-        {/* {console.log(this.state.result)} */}
+        <p>{this.state.result}</p>
+        {console.log(this.state.result)}
       </div>
     );
   }
 }
 
-export default Admin;
+export default Admin
   

@@ -9,7 +9,7 @@ const Homepage = (props) => {
   const [imgUrl, setImgUrl] = useState();
   console.log("Home Email: ", props.sendData);
 
-  QRCode.toDataURL(props.sendData)
+  QRCode.toDataURL(`Name: ${props.sendData.name} \n Email: ${props.sendData.email} \n Company: ${props.sendData.company} \n City: ${props.sendData.city}`)
     .then((res) => setImgUrl(res))
     .catch((err) => console.log(err));
 

@@ -22,9 +22,9 @@ const Login = (props) => {
   const login = () => {
     const { email } = user;
     if (email) {
-      axios.post("http://localhost:9002/login", user).then((res) => {
+      axios.post("https://event-backend.cyclic.app/login", user).then((res) => {
         if (res.data.message === "User not registered") {
-          alert(res.data.message)
+          alert(res.data.message);
           navigate("/");
         } else {
           navigate("/homepage");
