@@ -3,9 +3,11 @@ import "./Register.css";
 import axios from "axios";
 import logo from "../../assests/360-logo.png";
 import { useNavigate } from "react-router-dom";
+import QRCode from "qrcode";
 
-const Register = () => {
+const Register = (props) => {
   const navigate = useNavigate();
+  const [imgUrl, setImgUrl] = useState('');
 
   const [user, setUser] = useState({
     name: "",
@@ -23,20 +25,36 @@ const Register = () => {
   };
 
   //post to backend
-  const register = async () => {
+  const register = () => {
     const { name, email, company, city } = user;
     if (name && email && company && city) {
-      axios.post("http://localhost:9002/register", user)
-        .then(res => alert(res.data.message));
+      axios.post("http://localhost:9002/register", user).then((res) => {
+        if (res.data.message === "User already registered") {
+          alert(res.data.message);
+          navigate("/login");
+        } else {
+          props.getData(user.email)
+          navigate("/homepage");
+        }
+      });
     } else {
       alert("Invalid Input");
     }
+
+    //qr generate
+    // try{
+    //     const response = await QRCode.toDataURL('test qrcode generation');
+    //     console.log(response)
+    // }catch(error){
+    //   console.log(error);
+    // }
   };
 
   return (
     <div className="register">
+      {console.log(imgUrl)}
       <img src={logo} alt="logo" className="logo" />
-      <h2>Register</h2>
+      <h2>Registeration</h2>
       <input
         type="text"
         name="name"
@@ -69,7 +87,10 @@ const Register = () => {
         Register
       </div>
       <div>or</div>
-      <div className="button" onClick={()=> navigate('./login')}>Login</div>
+      <p className="p-text" onClick={() => navigate("/login")}>
+        Already Registered?
+      </p>
+      {/* <img src={imgUrl} alt="QR code" /> */}
     </div>
   );
 };

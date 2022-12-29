@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Homepage from "./components/homepage/Homepage";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
+import Admin from './components/admin/Admin';
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,22 +12,16 @@ import {
 
 
 function App() {
-  const [ruser, setRegisterUser] = useState({})
-  const [user, setLoginUser] = useState({})
+  const [data, setData] = useState('')
+
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path='/' element={<Register setRuser={setRegisterUser} />} />
-          <Route exact path='/login' element={<Login setLoginUser={setLoginUser} />} />
-          <Route exact path='/homepage' element={<Homepage/>} />
-          {/* {user && user._id ?
-            <Route exact path='/homepage' element={<Homepage />} /> :
-            <Route exact path='/' element={<Register setRuser={setRegisterUser} />} />} */}
-          {/* <Route exact path='/homepage' element={<Homepage />} /> */}
-          {/* {ruser && ruser._id ? 
-          <Route exact path='/homepage' element={<Homepage />} /> : 
-          <Route exact path='/login' element={<Login setLoginUser={setLoginUser} />} />} */}
+          <Route exact path='/' element={<Register getData={setData}/>} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/homepage' element={<Homepage sendData={data}/>} />
+          <Route exact path='/admin' element={<Admin/>}/>
         </Routes>
       </Router>
     </div>

@@ -23,8 +23,12 @@ const Login = (props) => {
     const { email } = user;
     if (email) {
       axios.post("http://localhost:9002/login", user).then((res) => {
-        alert(res.data.message);
-        props.setLoginUser(res.data.user);
+        if (res.data.message === "User not registered") {
+          alert(res.data.message)
+          navigate("/");
+        } else {
+          navigate("/homepage");
+        }
       });
     }
   };
@@ -32,7 +36,7 @@ const Login = (props) => {
   return (
     <div className="login">
       <img src={logo} alt="logo" className="logo" />
-      <h2 className="h-text">Login</h2>
+      {/* <h2 className="h-text">Login</h2> */}
       <input
         type="email"
         name="email"
@@ -41,11 +45,11 @@ const Login = (props) => {
         onChange={handleChange}
       />
       <div className="button" onClick={login}>
-        Login
+        Get QR Code
       </div>
       <div>or</div>
-      <div className="button" onClick={() => navigate("/")}>
-        Register
+      <div className="p-text" onClick={() => navigate("/")}>
+        Not Registered?
       </div>
     </div>
   );

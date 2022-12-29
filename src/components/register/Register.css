@@ -14,6 +14,16 @@
     padding: 10px;
 }
 
+.p-text{
+    margin-top: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.p-text:hover{
+        color: #1877f2;
+}
+
 .register > input {
     border-radius: 8px;
     border: 2px solid #dddfe2;
