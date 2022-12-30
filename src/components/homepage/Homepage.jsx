@@ -24,7 +24,10 @@ const Homepage = (props) => {
     if (!isMailSent && imgUrl !== "") {
       setIsMailSent(true);
       axios
-        .post("http://localhost:9002/homepage", [imgUrl, props.sendData.email])
+        .post("https://event-backend.cyclic.app/homepage", [
+          imgUrl,
+          props.sendData.email,
+        ])
         .then();
     }
   });

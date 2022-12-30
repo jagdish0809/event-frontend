@@ -29,7 +29,7 @@ const Register = (props) => {
   const register = () => {
     const { name, email, company, city } = user;
     if (name && email && company && city) {
-      axios.post("http://localhost:9002/register", user).then(
+      axios.post("https://event-backend.cyclic.app/register", user).then(
         (res) => {
           if (res.data.message === "User already registered") {
             notify(res.data.message);
