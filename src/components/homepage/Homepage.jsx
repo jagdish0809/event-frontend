@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from "react";
-import DummyQR from "../../assests/dummy-QR.jpg";
 import "./Homepage.css";
 import logo from "../../assests/360-logo.png";
 import axios from "axios";
 import QRCode from "qrcode";
 
 const Homepage = (props) => {
-  const [imgUrl, setImgUrl] = useState();
+  const [imgUrl, setImgUrl] = useState("");
+  const [isMailSent, setIsMailSent] = useState(false);
   console.log("Home Email: ", props.sendData);
 
-  QRCode.toDataURL(`Name: ${props.sendData.name} \n Email: ${props.sendData.email} \n Company: ${props.sendData.company} \n City: ${props.sendData.city}`)
-    .then((res) => setImgUrl(res))
-    .catch((err) => console.log(err));
+  useEffect(() => {
+    //sending url to backend
+    const data = {
+      name: props.sendData.name,
+      email: props.sendData.email,
+      company: props.sendData.company,
+      city: props.sendData.city,
+    };
+    const qrData = JSON.stringify(data);
+    QRCode.toDataURL(qrData)
+      .then((res) => setImgUrl(res))
+      .catch((err) => console.log(err));
+    if (!isMailSent && imgUrl !== "") {
+      setIsMailSent(true);
+      axios
+        .post("http://localhost:9002/homepage", [imgUrl, props.sendData.email])
+        .then();
+    }
+  });
 
   // try{
   //   const response = QRCode.toDataURL(props.sendData);
